@@ -1,208 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .show{
-      width: 200px;
-      height: 150px;
-      border: 1px solid black;
-    }
-  </style>
-</head>
-<body>
-  <input type="button" value="a" class="btn-key">
-  <input type="button" value="b" class="btn-key">
-  <input type="button" value="c" class="btn-key">
-  <input type="button" value="d" class="btn-key">
-  <input type="button" value="e" class="btn-key">
-  <input type="button" value="f" class="btn-key">
-  <input type="button" value="g" class="btn-key">
-  <input type="button" value="h" class="btn-key">
-  <input type="button" value="i" class="btn-key">
-  <input type="button" value="j" class="btn-key">
-  <input type="button" value="k" class="btn-key">
-  <input type="button" value="l" class="btn-key">
-  <input type="button" value="m" class="btn-key">
-  <input type="button" value="n" class="btn-key">
-  <input type="button" value="o" class="btn-key">
-  <input type="button" value="p" class="btn-key">
-  <input type="button" value="q" class="btn-key">
-  <input type="button" value="r" class="btn-key">
-  <input type="button" value="s" class="btn-key">
-  <input type="button" value="t" class="btn-key">
-  <input type="button" value="u" class="btn-key">
-  <input type="button" value="v" class="btn-key">
-  <input type="button" value="w" class="btn-key">
-  <input type="button" value="x" class="btn-key">
-  <input type="button" value="y" class="btn-key">
-  <input type="button" value="z" class="btn-key">
-  <input type="button" value="bksp" class="btn-key">
-  <input type="button" value="space" class="btn-key" placeholder="space">
-  <input type="text" name="input" id="input">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <input type="text" id="input">
+    <div class="keyboard">
+      <div class="row_number">
+        <input type="button" value="1" class="btn-key" />
+        <input type="button" value="2" class="btn-key" />
+        <input type="button" value="3" class="btn-key" />
+        <input type="button" value="4" class="btn-key" />
+        <input type="button" value="5" class="btn-key" />
+        <input type="button" value="6" class="btn-key" />
+        <input type="button" value="7" class="btn-key" />
+        <input type="button" value="8" class="btn-key" />
+        <input type="button" value="9" class="btn-key" />
+        <input type="button" value="0" class="btn-key" />
+        <label for="bksp" class="label-bksp"><-</label>
+      </div>
+      <div class="row_top">
+        <input type="button" value="q" class="btn-key" />
+        <input type="button" value="w" class="btn-key" />
+        <input type="button" value="e" class="btn-key" />
+        <input type="button" value="r" class="btn-key" />
+        <input type="button" value="t" class="btn-key" />
+        <input type="button" value="y" class="btn-key" />
+        <input type="button" value="u" class="btn-key" />
+        <input type="button" value="i" class="btn-key" />
+        <input type="button" value="o" class="btn-key" />
+        <input type="button" value="p" class="btn-key" />
+      </div>
+      <div class="row_center">
+        <input type="button" value="caps" class="caps-key" />
+        <input type="button" value="a" class="btn-key" />
+        <input type="button" value="s" class="btn-key" />
+        <input type="button" value="d" class="btn-key" />
+        <input type="button" value="f" class="btn-key" />
+        <input type="button" value="g" class="btn-key" />
+        <input type="button" value="h" class="btn-key" />
+        <input type="button" value="j" class="btn-key" />
+        <input type="button" value="k" class="btn-key" />
+        <input type="button" value="l" class="btn-key" />
+      </div>
+      <div class="row_bottom">
+        <input type="button" value="z" class="btn-key" />
+        <input type="button" value="x" class="btn-key" />
+        <input type="button" value="c" class="btn-key" />
+        <input type="button" value="v" class="btn-key" />
+        <input type="button" value="b" class="btn-key" />
+        <input type="button" value="n" class="btn-key" />
+        <input type="button" value="m" class="btn-key" />
+      </div>
+      <div class="row_sp">
+        <label for="space" class="label-space"></label>
+      </div>
+    </div>
+    <input type="button" value="space" class="btn-key" id="space" hidden/>
+    <input type="button" value="bksp" class="btn-key" id="bksp" hidden/>
+    <script src="/simple.js"></script>
+    <script>
+      const key = document.querySelectorAll('.btn-key');
+      const capsKey = document.querySelector('.caps-key');
+      var caps = false;
+      capsKey.addEventListener('click', () => {
+        caps = !caps;
+        if (caps) {
+          key.forEach((el) =>
+            el.value !== 'space' && el.value !== 'bksp'
+              ? (el.value = el.value.toUpperCase())
+              : (el.value = el.value),
+          );
+          capsKey.value = capsKey.value.toUpperCase();
+        } else {
+          key.forEach((el) => (el.value = el.value.toLowerCase()));
+          capsKey.value = capsKey.value.toLowerCase();
+        }
+      });
+      const input = document.getElementById('input');
+      var arr = [];
+      key.forEach((el) => {
+        el.addEventListener('click', () => {
+          console.log(el.value);
+          if (el.value == 'space') arr.push(' ');
+          else if (el.value == 'bksp') {
+            arr.pop();
+          } else {
+            arr.push(caps ? el.value.toUpperCase() : el.value);
+          }
+          let string = arr.join('');
+          input.value = arr.join('');
+          let arrBig = load(arr, string);
 
-
-
-  <script>
-   const key=document.querySelectorAll('.btn-key');
-   const input=document.getElementById('input')
-   var arr=[];
-   var arrBig=[];
-   key.forEach(el=>{
-     el.addEventListener('click',()=>{
-      // console.log(arr);
-      console.log(el.value);
-      if(el.value=="space")
-        arr.push(' ');
-      else if (el.value=="bksp"){
-        arr.pop();
-      }
-      else{
-        arr.push(el.value);
-      }
-      // console.log(arr);
-      let string=arr.join('');
-      // console.log(string);
-      input.value=arr.join('')
-
-      switch (true) {
-        case /Đ+[dD]/g.test(string):arr.splice(arr.indexOf('Đ'),2,'D','D');break;   
-        case /D+[dD]/g.test(string):arr.splice(arr.indexOf('D'),2,'Đ'); break; 
-        case /d+[dD]/g.test(string):arr.splice(arr.indexOf('d'),2,'đ');break; 
-        case /đ+[dD]/g.test(string): arr.splice(arr.indexOf('đ'),2,'d','d');break; 
-        // a
-        case /\aj/ig.test(string):arr.splice(arr.indexOf('a'),2,'ạ');break; 
-        case /\af/ig.test(string):arr.splice(arr.indexOf('a'),2,'à');break; 
-        case /\as/ig.test(string):arr.splice(arr.indexOf('a'),2,'á');break; 
-        case /\ar/ig.test(string):arr.splice(arr.indexOf('a'),2,'ả');break; 
-        case /\ax/ig.test(string):arr.splice(arr.indexOf('a'),2,'ã');break; 
-        case /ả+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ả'),2,`a${el.value}`);break;
-        case /á+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('á'),2,`a${el.value}`);break;
-        case /à+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('à'),2,`a${el.value}`);break;
-        case /ạ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ạ'),2,`a${el.value}`);break;
-        case /ã+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ã'),2,`a${el.value}`);break;
-        // â
-        case /\aa/ig.test(string):arr.splice(arr.indexOf('a'),2,'â');break; 
-        case /â+[aA]/g.test(string):arr.splice(arr.indexOf('â'),2,'a','a'); break; 
-        case /Â+[aA]/g.test(string):arr.splice(arr.indexOf('Â'),2,'A','A'); break; 
-        case /\âj/ig.test(string):arr.splice(arr.indexOf('â'),2,'ậ');break; 
-        case /\âf/ig.test(string):arr.splice(arr.indexOf('â'),2,'ầ');break; 
-        case /\âs/ig.test(string):arr.splice(arr.indexOf('â'),2,'ấ');break; 
-        case /\âr/ig.test(string):arr.splice(arr.indexOf('â'),2,'ẩ');break; 
-        case /ẩ+([fF]|[sS]|[jJ]|[rR])/ig.test(string):arr.splice(arr.indexOf('ẩ'),2,`â${el.value}`);break;
-        case /ấ+([fF]|[sS]|[jJ]|[rR])/ig.test(string):arr.splice(arr.indexOf('ấ'),2,`â${el.value}`);break;
-        case /ầ+([fF]|[sS]|[jJ]|[rR])/ig.test(string):arr.splice(arr.indexOf('ầ'),2,`â${el.value}`);break;
-        case /ậ+([fF]|[sS]|[jJ]|[rR])/ig.test(string):arr.splice(arr.indexOf('ậ'),2,`â${el.value}`);break;
-        // ă
-        case /\aw/ig.test(string):arr.splice(arr.indexOf('a'),2,'ă');break; 
-        case /ă+[aA]/g.test(string):arr.splice(arr.indexOf('ă'),2,'a'); break; 
-        case /Ă+[aA]/g.test(string):arr.splice(arr.indexOf('Ă'),2,'A','A'); break; 
-        case /\ăj/ig.test(string):arr.splice(arr.indexOf('ă'),2,'ặ');break; 
-        case /\ăf/ig.test(string):arr.splice(arr.indexOf('ă'),2,'ằ');break; 
-        case /\ăs/ig.test(string):arr.splice(arr.indexOf('ă'),2,'ắ');break; 
-        case /\ăr/ig.test(string):arr.splice(arr.indexOf('ă'),2,'ẳ');break; 
-        case /ẳ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ẳ'),2,`ă${el.value}`);break;
-        case /ắ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ắ'),2,`ă${el.value}`);break;
-        case /ằ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ằ'),2,`ă${el.value}`);break;
-        case /ặ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ặ'),2,`ă${el.value}`);break;
-        // u
-        case /\uj/ig.test(string):arr.splice(arr.indexOf('u'),2,'ụ');break; 
-        case /\uf/ig.test(string):arr.splice(arr.indexOf('u'),2,'ù');break; 
-        case /\us/ig.test(string):arr.splice(arr.indexOf('u'),2,'ú');break; 
-        case /\ur/ig.test(string):arr.splice(arr.indexOf('u'),2,'ủ');break; 
-        case /\ux/ig.test(string):arr.splice(arr.indexOf('u'),2,'ũ');break; 
-        case /ủ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ủ'),2,`u${el.value}`);break;
-        case /ù+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ù'),2,`u${el.value}`);break;
-        case /ú+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ú'),2,`u${el.value}`);break;
-        case /ụ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ụ'),2,`u${el.value}`);break;
-        case /ũ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ũ'),2,`u${el.value}`);break;
-        // ư
-        case /\uw/ig.test(string):arr.splice(arr.indexOf('u'),2,'ư');break; 
-        case /Ư+[wW]/g.test(string):arr.splice(arr.indexOf('Ư'),2,'U','W'); break;
-        case /ư+[wW]/g.test(string):arr.splice(arr.indexOf('ư'),2,'u','w'); break; 
-        case /\ưj/ig.test(string):arr.splice(arr.indexOf('ư'),2,'ự');break; 
-        case /\ưf/ig.test(string):arr.splice(arr.indexOf('ư'),2,'ừ');break; 
-        case /\ưs/ig.test(string):arr.splice(arr.indexOf('ư'),2,'ứ');break; 
-        case /\ưr/ig.test(string):arr.splice(arr.indexOf('ư'),2,'ử');break; 
-        case /\ưx/ig.test(string):arr.splice(arr.indexOf('ư'),2,'ữ');break; 
-        case /ử+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ử'),2,`ư${el.value}`);break;
-        case /ừ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ừ'),2,`ư${el.value}`);break;
-        case /ứ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ứ'),2,`ư${el.value}`);break;
-        case /ự+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ự'),2,`ư${el.value}`);break;
-        case /ữ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ữ'),2,`ư${el.value}`);break;
-        // o
-        case /\oj/ig.test(string):arr.splice(arr.indexOf('o'),2,'ọ');break; 
-        case /\of/ig.test(string):arr.splice(arr.indexOf('o'),2,'ò');break; 
-        case /\os/ig.test(string):arr.splice(arr.indexOf('o'),2,'ó');break; 
-        case /\or/ig.test(string):arr.splice(arr.indexOf('o'),2,'ỏ');break; 
-        case /\ox/ig.test(string):arr.splice(arr.indexOf('o'),2,'õ');break; 
-        case /ỏ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ỏ'),2,`o${el.value}`);break;
-        case /ó+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ó'),2,`o${el.value}`);break;
-        case /ò+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ò'),2,`o${el.value}`);break;
-        case /ọ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ọ'),2,`o${el.value}`);break;
-        case /õ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('õ'),2,`o${el.value}`);break;
-        // ơ
-        case /\ow/ig.test(string):arr.splice(arr.indexOf('o'),2,'ơ');break; 
-        case /\ơw/ig.test(string):arr.splice(arr.indexOf('ơ'),2,'o','o');break; 
-        case /\ơj/ig.test(string):arr.splice(arr.indexOf('ơ'),2,'ợ');break; 
-        case /\ơf/ig.test(string):arr.splice(arr.indexOf('ơ'),2,'ờ');break; 
-        case /\ơs/ig.test(string):arr.splice(arr.indexOf('ơ'),2,'ớ');break; 
-        case /\ơr/ig.test(string):arr.splice(arr.indexOf('ơ'),2,'ở');break; 
-        case /\ơx/ig.test(string):arr.splice(arr.indexOf('ơ'),2,'ỡ');break; 
-        case /ở+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ở'),2,`ơ${el.value}`);break;
-        case /ớ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ớ'),2,`ơ${el.value}`);break;
-        case /ờ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ờ'),2,`ơ${el.value}`);break;
-        case /ợ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ợ'),2,`ơ${el.value}`);break;
-        case /ỡ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ỡ'),2,`ơ${el.value}`);break;
-        // ô
-        case /\oo/ig.test(string):arr.splice(arr.indexOf('o'),2,'ô');break; 
-        case /\ôo/ig.test(string):arr.splice(arr.indexOf('ô'),2,'o','o');break; 
-        case /\ôj/ig.test(string):arr.splice(arr.indexOf('ô'),2,'ộ');break; 
-        case /\ôf/ig.test(string):arr.splice(arr.indexOf('ô'),2,'ồ');break; 
-        case /\ôs/ig.test(string):arr.splice(arr.indexOf('ô'),2,'ố');break; 
-        case /\ôr/ig.test(string):arr.splice(arr.indexOf('ô'),2,'ổ');break; 
-        case /\ôx/ig.test(string):arr.splice(arr.indexOf('ô'),2,'ỗ');break; 
-        case /ổ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ổ'),2,`ô${el.value}`);break;
-        case /ố+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ố'),2,`ô${el.value}`);break;
-        case /ồ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ồ'),2,`ô${el.value}`);break;
-        case /ộ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ộ'),2,`ô${el.value}`);break;
-        case /ỗ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ỗ'),2,`ô${el.value}`);break;
-
-        //e
-        case /\ej/ig.test(string):arr.splice(arr.indexOf('e'),2,'ẹ');break; 
-        case /\ef/ig.test(string):arr.splice(arr.indexOf('e'),2,'è');break; 
-        case /\es/ig.test(string):arr.splice(arr.indexOf('e'),2,'é');break; 
-        case /\er/ig.test(string):arr.splice(arr.indexOf('e'),2,'ẻ');break; 
-        case /\ex/ig.test(string):arr.splice(arr.indexOf('e'),2,'ẽ');break; 
-        case /ẻ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ẻ'),2,`e${el.value}`);break;
-        case /é+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('é'),2,`e${el.value}`);break;
-        case /è+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('è'),2,`e${el.value}`);break;
-        case /ẹ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ẹ'),2,`e${el.value}`);break;
-        case /ẽ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ẽ'),2,`e${el.value}`);break;
-        //ê
-        case /\ee/ig.test(string):arr.splice(arr.indexOf('e'),2,'ê');break; 
-        case /\êe/ig.test(string):arr.splice(arr.indexOf('ê'),2,'e','e');break; 
-        case /\êj/ig.test(string):arr.splice(arr.indexOf('ê'),2,'ệ');break; 
-        case /\êf/ig.test(string):arr.splice(arr.indexOf('ê'),2,'ề');break; 
-        case /\ês/ig.test(string):arr.splice(arr.indexOf('ê'),2,'ế');break; 
-        case /\êr/ig.test(string):arr.splice(arr.indexOf('ê'),2,'ể');break; 
-        case /\êx/ig.test(string):arr.splice(arr.indexOf('ê'),2,'ễ');break; 
-        case /ể+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ể'),2,`ê${el.value}`);break;
-        case /ế+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ế'),2,`ê${el.value}`);break;
-        case /ề+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ề'),2,`ê${el.value}`);break;
-        case /ệ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ệ'),2,`ê${el.value}`);break;
-        case /ễ+([fF]|[sS]|[jJ]|[rR]|[xX])/ig.test(string):arr.splice(arr.indexOf('ễ'),2,`ê${el.value}`);break;
-
-      }
-      input.value=arr.join('')
-
-     })
-   });
-  </script>
-</body>
+          input.value = arrBig.join('');
+        });
+      });
+    </script>
+  </body>
 </html>
-
-
